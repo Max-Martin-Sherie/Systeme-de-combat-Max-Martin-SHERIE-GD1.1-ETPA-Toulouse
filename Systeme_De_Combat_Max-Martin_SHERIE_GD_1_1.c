@@ -89,7 +89,7 @@ int main(){
 			printf("Le monstre de protege\n");
 			defense=1;
 		}else if(numAttaque==2){
-			printf("Vous jetez un sort de poisson pourris sur l'ennemi!\n");
+			printf("Le monstre vous crache dessus! Vous etes empoisonne.\n");
 			PMMonstre=PMMonstre-5;
 			empoisonementJoueur=5;
 			defense=0;
@@ -97,7 +97,7 @@ int main(){
 		
 		if(empoisonementJoueur>0){
 			empoisonementJoueur--;
-			printf("Emposonne, Vous perdez 5 points de vie\n");
+			printf("Empoisonne, Vous perdez 5 points de vie\n");
 			PDVJoueur=empoisonement(PDVJoueur);
 			
 		}
