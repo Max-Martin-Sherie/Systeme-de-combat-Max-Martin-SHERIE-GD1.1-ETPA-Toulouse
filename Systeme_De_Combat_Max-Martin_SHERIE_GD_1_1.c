@@ -3,11 +3,16 @@
 //Declaration des points de vies
 int PDVJoueur=100;
 int PDVMonstre=200;
+int defense=0;
 int numAttaque;
 
 //Fonction d'une attaque simple
-int attaqueSimple(int viesCible) {
-	viesCible=viesCible-10;
+int attaqueSimple(int viesCible, int protection) {
+	if(protection==1){
+		viesCible=viesCible-5;
+	}else{
+		viesCible=viesCible-20;
+	}
 	
 	return viesCible;
 }
@@ -17,20 +22,26 @@ int main(){
 	
 	while ((PDVJoueur>1) && (PDVMonstre>1)){
 		printf("c'est a vous de jouer\n");
-		printf("(1)attaquer\n");
+		printf("(1)attaquer (2)se defendre\n");
 		
 		scanf("%d", &numAttaque);
 		
-		while(numAttaque != 1){
-			printf("Il n'ty a pas d'attaque numero %d ! \n",numAttaque);
+		while(numAttaque != 1 && numAttaque != 2){
+			printf("Il n'y a pas d'attaque numero %d ! \n",numAttaque);
 			scanf("%d", &numAttaque);
 		}
-		PDVMonstre=attaqueSimple(PDVMonstre);
-		printf("Vous frappez l'ennemi d'un glorieux coup de sabre !\n");
-		printf("Il lui reste %d Points de vie\n \n",PDVMonstre);
+		if(numAttaque==1){
+			PDVMonstre=attaqueSimple(PDVMonstre,defense);
+			printf("Vous frappez l'ennemi d'un glorieux coup de sabre !\n");
+		}else if(numAttaque==2){
+			printf("vous vous retraitez derriere votre bouclier en mythril!\n");
+			defense=1;
+		}
+		printf("Il reste %d Points de vie au monstre\n \n",PDVMonstre);
 		
 		
-		PDVJoueur=attaqueSimple(PDVJoueur);
+		PDVJoueur=attaqueSimple(PDVJoueur,defense);
+		defense=0;
 		printf("Le Monstre attaque d'un coup de pate hideuse!\n");
 		printf("Il vous reste %d Points de vie\n \n",PDVJoueur);
 	}
