@@ -37,12 +37,12 @@ int main(){
 		printf("c'est a vous de jouer\n");
 		PMJoueur++;
 		printf("Vous avez %d PM\n",PMJoueur);
-		printf("(1)attaque (2)se defense (3)poison\n");
+		printf("(1)attaque (2)se defense (3)poison (4)antidote\n");
 		
 		scanf("%d", &numAttaque);
 		
-		while(numAttaque != 1 && numAttaque != 2 && (numAttaque==3 && PMJoueur<5)){
-			if(PMJoueur<5 && numAttaque==3){
+		while(numAttaque != 1 && numAttaque != 2 && (numAttaque==3 && PMJoueur<5) && (numAttaque!=4&& PMJoueur<3)){
+			if((PMJoueur<5 && numAttaque==3) || (numAttaque!=4&& PMJoueur<3)){
 				printf("vous n'avez pas assez de PM pour lancer ce sort\n");
 			}else{
 				printf("Il n'y a pas d'attaque numero %d ! \n",numAttaque);
@@ -60,6 +60,10 @@ int main(){
 			printf("Vous jetez un sort de poisson pourris sur l'ennemi!\n");
 			PMJoueur=PMJoueur-5;
 			empoisonementMonstre=3;
+			defense=0;
+		}else if(numAttaque=4){
+			PMJoueur=PMJoueur-3;
+			empoisonementJoueur=0;
 			defense=0;
 		}
 		if(empoisonementMonstre>0){
