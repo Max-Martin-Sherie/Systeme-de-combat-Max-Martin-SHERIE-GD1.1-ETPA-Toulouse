@@ -5,8 +5,8 @@
 //Declaration des points de vies
 int PDVJoueur=100;
 int PDVMonstre=200;
-int PMJoueur=5;
-int PMMonstre=3;
+int PMJoueur=4;
+int PMMonstre=14;
 int empoisonementJoueur=0;
 int empoisonementMonstre=0;
 int defense=0;
@@ -35,6 +35,7 @@ int main(){
 	
 	while ((PDVJoueur>1) && (PDVMonstre>1)){
 		printf("c'est a vous de jouer\n");
+		PMJoueur++;
 		printf("Vous avez %d PM\n",PMJoueur);
 		printf("(1)attaque (2)se defense (3)poison\n");
 		
@@ -42,7 +43,7 @@ int main(){
 		
 		while(numAttaque != 1 && numAttaque != 2 && (numAttaque==3 && PMJoueur<5)){
 			if(PMJoueur<5 && numAttaque==3){
-				printf("vous n'avez pas assez de PM pour lancer ce sort");
+				printf("vous n'avez pas assez de PM pour lancer ce sort\n");
 			}else{
 				printf("Il n'y a pas d'attaque numero %d ! \n",numAttaque);
 			}
@@ -69,7 +70,12 @@ int main(){
 		
 		printf("Il reste %d points de vie au monstre\n \n",PDVMonstre);
 		
-		numAttaque = rand()%2;
+		PMMonstre++;
+		if(PMMonstre>14){
+			numAttaque = rand()%3;
+		}else{
+			numAttaque = rand()%2;
+		}
 		
 		if(numAttaque==0){
 		PDVJoueur=attaqueSimple(PDVJoueur);
@@ -78,6 +84,18 @@ int main(){
 		}else if(numAttaque==1){
 			printf("Le monstre de protege\n");
 			defense=1;
+		}else if(numAttaque==2){
+			printf("Vous jetez un sort de poisson pourris sur l'ennemi!\n");
+			PMMonstre=PMMonstre-5;
+			empoisonementJoueur=5;
+			defense=0;
+		}
+		
+		if(empoisonementJoueur>0){
+			empoisonementJoueur--;
+			printf("Emposonne, Vous perdez 5 points de vie\n");
+			PDVJoueur=empoisonement(PDVJoueur);
+			
 		}
 		
 		printf("Il vous reste %d Points de vie\n \n",PDVJoueur);
